@@ -14,6 +14,7 @@ public class LoginTest extends BaseTest {
   HomePageEvents homePage = new HomePageEvents();
   LoginPageEvents loginPage = new LoginPageEvents();
   //@Test(dependsOnMethods = {"qa.test.HomeTest.HomePageTestCase"})
+  //LoginTest method 1 
   @Test
   public void LoginHomePageTest() {
 	 logger.info("Signin into LoginPage");
