@@ -12,7 +12,7 @@ public class HomeTest extends BaseTest{
 	ElementFetch ele = new ElementFetch();
 	HomePageEvents homePage = new HomePageEvents();
 	LoginPageEvents loginPage = new LoginPageEvents();
-	
+	//Method1 for home test
 	 @Test
 	  public void HomePageTestCase() {
 		 logger.info("Clicking on about us button");
@@ -25,7 +25,7 @@ public class HomeTest extends BaseTest{
 		 homePage.ContactTab();
 		 driver.navigate().back();
 	 }
-	 //Test method 2
+	 //Method 2 for home test
 	 @Test
 		public void HomePageTestCase2()
 		{
