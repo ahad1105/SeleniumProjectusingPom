@@ -1,0 +1,33 @@
+name: Automated Testing
+
+on:
+  workflow_dispatch:  # Allows manual triggering
+  schedule:
+    # Runs at 9:00 AM IST (3:30 AM UTC) every day
+    - cron: '30 3 * * *'
+    # Runs at 7:00 PM IST (1:30 PM UTC) every day
+    - cron: '30 13 * * *'
+
+jobs:
+  test:
+    runs-on: windows-latest  # Use the latest Windows environment
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: '21.0.4'  # Your Java version
+        distribution: 'temurin'  # Use the Temurin distribution
+
+    - name: Set up Chrome
+      uses: browser-actions/setup-chrome@v1
+      with:
+        chrome-version: 'latest'  # Install the latest version of Chrome
+
+    - name: Run tests
+      run: |
+        mvn install -DskipTests
+        mvn clean test -Dbrowser=chrome
