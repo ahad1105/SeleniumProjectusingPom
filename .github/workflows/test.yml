@@ -24,33 +24,37 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      # Step 3: Set up Java
-      - name: Set up Java
+      # Step 3: Set up Java 21
+      - name: Set up Java 21
         uses: actions/setup-java@v3
         with:
-          java-version: '21' # Use '11' or '17' if necessary
+          java-version: '21'  # Java version as you provided
           distribution: 'temurin'
 
-      # Step 4: Install Maven
-      - name: Install Maven
+      # Step 4: Install Maven 3.9.9
+      - name: Install Maven 3.9.9
         run: |
-          curl -o maven.zip https://dlcdn.apache.org/maven/maven-3/3.9.5/binaries/apache-maven-3.9.5-bin.zip
+          curl -o maven.zip https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.zip
           tar -xf maven.zip
-          echo "Maven installation completed"
+          echo "Maven 3.9.9 installation completed"
 
-      # Step 5: Install Chrome
+      # Step 5: Verify Maven version
+      - name: Verify Maven version
+        run: mvn -v
+
+      # Step 6: Install Chrome
       - name: Set up Chrome
         uses: browser-actions/setup-chrome@v1
         with:
           chrome-version: 'latest'
 
-      # Step 6: Build and test
+      # Step 7: Build and run tests
       - name: Build and run tests
         run: |
           mvn clean install -DskipTests
           mvn clean test -Dbrowser=chrome
 
-      # Step 7: Archive test reports
+      # Step 8: Archive test reports
       - name: Archive test reports
         uses: actions/upload-artifact@v3
         with:
