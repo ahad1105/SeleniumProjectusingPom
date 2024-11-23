@@ -11,7 +11,7 @@ public interface HomePageElements {
 	String Signup = "//a[@class='btn btn-sm btn-white btn-icon btn-icon-left btn-shadow btn-border btn-rect offset-sm-top-60 offset-top-30']";
 	String Pricing = "//a[normalize-space()='Pricing']";
 	String pricingHeading = "//h1[@class='offset-top-20']";
-	String SignupHeading = "//h2[@class='ui blue header']";
+	String SignupHeading = "//span[@aria-label='register']";
 	
 	
 		
