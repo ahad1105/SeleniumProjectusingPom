@@ -3,21 +3,17 @@ name: Automated Testing
 on:
   workflow_dispatch:  # Allows manual triggering
   schedule:
-    # Runs at 9:00 AM IST (3:30 AM UTC) every day
-    - cron: '30 3 * * *'
-    # Runs at 7:00 PM IST (1:30 PM UTC) every day
-    - cron: '30 13 * * *'
+    - cron: '30 3 * * *' # 9:00 AM IST
+    - cron: '30 13 * * *' # 7:00 PM IST
 
 jobs:
   test:
-    runs-on: windows-latest  # Use the latest Windows environment
+    runs-on: windows-latest
 
     steps:
-    # Step 1: Checkout the repository
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    # Step 2: Cache Maven dependencies to improve performance
     - name: Cache Maven dependencies
       uses: actions/cache@v3
       with:
@@ -26,28 +22,18 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-maven-
 
-    # Step 3: Set up Java environment
     - name: Set up Java
       uses: actions/setup-java@v3
       with:
-        java-version: '21'  # Update to Java 21
+        java-version: '21'
         distribution: 'temurin'
 
-    # Step 4: Install Chrome browser
-    - name: Set up Chrome
-      uses: browser-actions/setup-chrome@v1
-      with:
-        chrome-version: 'latest'
+    - name: Install Maven dependencies
+      run: mvn dependency:resolve
 
-    # Step 5: Compile and run tests
     - name: Build and run tests
       run: |
         mvn clean install -DskipTests
         mvn clean test -Dbrowser=chrome
 
-    # Step 6: Archive test results for debugging
-    - name: Archive test reports
-      uses: actions/upload-artifact@v3
-      with:
-        name: test-results
-        path: target/surefire-reports/
+    - name: Archive test
