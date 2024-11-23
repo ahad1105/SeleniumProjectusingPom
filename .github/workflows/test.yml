@@ -36,4 +36,8 @@ jobs:
         mvn clean install -DskipTests
         mvn clean test -Dbrowser=chrome
 
-    - name: Archive test
+    - name: Archive test reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: target/surefire-reports/
