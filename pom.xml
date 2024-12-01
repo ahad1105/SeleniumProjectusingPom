@@ -15,7 +15,6 @@
       <groupId>org.testng</groupId>
       <artifactId>testng</artifactId>
       <version>7.7.1</version>
-      
     </dependency>
 
     <dependency>
@@ -49,6 +48,13 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>3.1.2</version>
+        <configuration>
+          <testFailureIgnore>false</testFailureIgnore>
+          <reportsDirectory>${project.basedir}/reports</reportsDirectory> <!-- Specify custom report directory -->
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
+        </configuration>
       </plugin>
     </plugins>
   </build>
