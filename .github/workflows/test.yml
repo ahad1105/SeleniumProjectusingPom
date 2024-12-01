@@ -36,7 +36,8 @@ jobs:
         run: |
           curl -o maven.zip https://dlcdn.apache.org/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.zip
           tar -xf maven.zip
-          echo "Maven 3.9.9 installation completed"
+          mv apache-maven-3.9.9 $HOME/maven
+          echo "$HOME/maven/bin" >> $GITHUB_PATH
 
       # Step 5: Verify Maven version
       - name: Verify Maven version
@@ -50,9 +51,7 @@ jobs:
 
       # Step 7: Build and run tests
       - name: Build and run tests
-        run: |
-          mvn clean install -DskipTests
-          mvn clean test -Dbrowser=chrome
+        run: mvn clean install -Dbrowser=chrome
 
       # Step 8: Archive test reports
       - name: Archive test reports
@@ -60,3 +59,4 @@ jobs:
         with:
           name: test-results
           path: target/surefire-reports/
+
