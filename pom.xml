@@ -50,7 +50,8 @@
         <version>3.1.2</version>
         <configuration>
           <testFailureIgnore>false</testFailureIgnore>
-          <reportsDirectory>${project.basedir}/reports</reportsDirectory> <!-- Specify custom report directory -->
+          <!-- Default report directory -->
+          <reportsDirectory>${project.basedir}/target/surefire-reports</reportsDirectory>
           <includes>
             <include>**/*Test.java</include>
           </includes>
