@@ -21,6 +21,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import java.io.File;
 import java.time.Duration;
@@ -54,7 +55,7 @@ public class BaseTest {
 
 	@BeforeTest
 	@Parameters("browser")
-	public void beforeTestMethod(String browser) {
+	public void beforeTestMethod(@Optional("chrome") String browser) {  // Default to "chrome" if not provided
 	    // Initialize the browser once before all tests
 	    setupDriver(browser);
 	    driver.manage().window().maximize();
